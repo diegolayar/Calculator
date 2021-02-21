@@ -36,7 +36,7 @@ On the right side of the screen, users can see in real time the last 10 calculat
 
 `npm install firebase`
 
-## Start Server
+### Start Server
 
 `npm start`
 
@@ -47,7 +47,9 @@ Feel free to reach out to me with any questions or anything in general. My email
 ## More About Me
 
 [Resume](https://drive.google.com/file/d/1kQjquwLIXNx8Rer66bfbvKu32DQtMBzn/view)
+
 [Personal Website](https://diegolaya.dev/)
+
 [Linked In](https://www.linkedin.com/in/diego-laya-b011b11a1/)
 
 ## Future Recommendations
