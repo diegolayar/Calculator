@@ -2,7 +2,7 @@
 
 On this application, users can calculate simple mathematical expressions and see the global history of calculations.
 
-You can either run locally (instructions below) or visit the [website]()
+You can either run locally (instructions below) or visit the [website](https://diegolayar.github.io/Calculator/)
 
 ## Technical Specifications
 
