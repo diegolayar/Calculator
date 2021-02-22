@@ -58,7 +58,10 @@ I decided to keep it simple because the 5 classes I'm taking did not let me expa
 some more features:
 
 1.- Enabling keyboard input.
+
 2.- Changing the precision of calculations, right now it's fixed on 3 decimal places.
+
 3.- More calculator functions.
+
 4.- Clicking on a calculation in the history and importing it into the calculator directly to
 modify it as the user wants.

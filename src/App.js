@@ -27,31 +27,38 @@ function App() {
   // presses on any button.
 
   if(!initialize) {
-    updateHistory();
+    detectNewOperation();
     checkAmount();
     initialize = true;
   }
 
+  // This function detects when a user adds a new calculation
 
-  /*
-  function keyDownTextField(e) {
-    var keyCode = e.keyCode;
-    console.log(e.key);
-    if(e.key.isInteger) {
-      setResult(result + e.key)
-    }
-  }*/
+  function detectNewOperation() {
+    database.ref("/").on("child_added", function(snapshot, prevChildKey) {
+        updateHistory();
+    });
+  }
 
   // Function called when user clicks "="
 
+  /*
+    Details:
+    - Only executes if the input is valid
+    - The results are fixed to 3 decimal places, to change, tweak the parameter on toFixed(x)
+    - The operation moves to the smaller line on top, and the result is displayed on the bigger line
+    - Since Firebase doesn't have ordering by timestamp, I decided to order by key, and making each calculation
+      have a unique key starting  from 0 to -Infinity.
+    - I chose negative numbers, because if I chose positive I would have had to store them in an array, and reverse it,
+      considering that the most recent would be at the bottom.
+    - I then update the count of calculations, which is also negative, which helps set the next calculation's key
+  */
+
   function enter() {
-
-    // If it's good input, execute
-
     if(executable) {
-      setOperation(result);                                        // Move the data in result big box, to operation smaller box
-      let sendResult = eval(result).toFixed(3).toString()          // Evaluate the operation
-      setResult(sendResult);                                       // Make the text on big box the result of the operation
+      setOperation(result);
+      let sendResult = eval(result).toFixed(3).toString()
+      setResult(sendResult);
 
       let amount = checkAmount();
       let position = amount - 1;
@@ -59,8 +66,6 @@ function App() {
 
       database.ref("count").set(--amount);
       database.ref(path).set(result + " = " + sendResult );
-
-      updateHistory();
     }
   }
 
@@ -80,7 +85,6 @@ function App() {
     database.ref("history/").orderByKey().limitToFirst(10).on('value', function(snapshot) {
       document.getElementById("history-block").innerHTML = '';
       snapshot.forEach(function(childSnapshot) {
-        console.log(childSnapshot.val());
         let htmlElement = "<div class=\"calculation\">" + childSnapshot.val() + "</div>";
         document.getElementById("history-block").innerHTML += htmlElement;
       })
@@ -104,7 +108,7 @@ function App() {
     setOperation("");
   }
 
-  // Function called when user clicks "DEL", which deletes the last character of the input.
+  // Function called when user clicks "DEL", which deletes the last character of the input, unless it's only 0.
 
   function backspace() {
     if(result.length == 1) { setResult('0');  }
@@ -115,6 +119,9 @@ function App() {
   // Function called when user clicks on any number, adding it to the input.
   // If there is no input A.K.A "0", replace 0 instead of adding to it to avoid
   // leading zeros.
+
+  // Also, given that eval() takes Integer + ( as an error, I automatically add a multiplication sign if a numbers
+  // precedes a parenthesis
 
   function addInput(e) {
     let id = e.target.id;
