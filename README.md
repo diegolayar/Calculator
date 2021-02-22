@@ -34,7 +34,7 @@ On the right side of the screen, users can see in real time the last 10 calculat
 
 ### Install Firebase
 
-`npm install firebase`
+`npm install --save firebase`
 
 ### Start Server
 
