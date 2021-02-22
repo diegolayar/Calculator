@@ -22,9 +22,9 @@ it is not processed. Valid input if represented by light green borders on the ca
 Parenthesis can be used to group expressions, and when there is no multiplication sign between a number and a starting parenthesis
 the app handles the  multiplication.
 
-### History of Calculations
+### Real Time History of Calculations
 
-On the right side of the screen, users can see in real time the last 10 calculations made by any other user.
+On the right side of the screen, users can see in real time the last 10 calculations made by any other user. New calculations will appear as soon as another user makes them, without the need to reload the page.
 
 ## To Run Locally:
 
