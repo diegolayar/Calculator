@@ -154,7 +154,7 @@ function App() {
 
   return (
     <>
-      <div id="navbar">Diego Laya's Calculator</div>
+      <div id="navbar">Simple Calculator</div>
       <div id = "content">
         <div id="calculator-side">
           <div id="resultParent">
